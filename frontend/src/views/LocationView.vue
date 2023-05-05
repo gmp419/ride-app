@@ -4,19 +4,11 @@
     <form action="#">
       <div class="overflow-hidden shadow sm:rounded-md max-w-sm mx-auto text-left">
         <div class="bg-white px-4 py-5 sm:p-6">
-<!--          <GMapAutocomplete-->
-<!--              @place_changed="locationChanged"-->
-<!--              placeholder="My destination"-->
-<!--              class="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 shadow-sm focus:border-black focus:outline-none"-->
-<!--          ></GMapAutocomplete>-->
-          <vue-google-autocomplete
-              id="address"
-              ref="autocompleteValue"
-              country="ca"
-              v-on:placechanged="locationChanged"
+          <GMapAutocomplete
               placeholder="My destination"
-              class="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 shadow-sm focus:border-black focus:outline-none"
-          ></vue-google-autocomplete>
+              @place_changed="locationChanged"
+              class="mt-1 block w-full px-3 py-2 rounded-md border border-gray-300 shadow-sm focus:border-black focus:outline-none">
+          </GMapAutocomplete>
         </div>
 
         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
@@ -32,29 +24,21 @@
 </template>
 
 <script setup>
-import VueGoogleAutocomplete from "vue-google-autocomplete";
-import {onMounted, ref} from "vue";
 import {useLocationStore} from "@/stores/location";
 import {useRouter} from "vue-router";
 
 const router = useRouter()
 const location = useLocationStore()
-const autocompleteValue = ref(null)
-
-onMounted(() => {
-  autocompleteValue.value.focus()
-})
-const locationChanged = (addressData, placeResultData, id) => {
-  console.log(addressData)
-  console.log(placeResultData)
+const locationChanged = (e) => {
+  console.log('locationChanged', e)
   location.$patch({
     destination: {
-      name: placeResultData.name,
-      address: placeResultData.formatted_address,
+      name: e.name,
+      address: e.formatted_address,
       geometry: {
-        lat: addressData.latitude,
-        lng: addressData.longitude
-      },
+        lat: e.geometry.location.lat(),
+        lng: e.geometry.location.lng()
+      }
     }
   })
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\TripAccepted;
+use App\Events\TripCreated;
 use App\Events\TripEnded;
 use App\Events\TripLocationUpdated;
 use App\Events\TripStarted;
@@ -13,13 +14,21 @@ class TripController extends Controller
 {
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'origin' => 'required',
             'destination' => 'required',
-            'destination_name' => 'required',
+            'destination_name' => 'required'
         ]);
 
-        return $request->user()->trips()->create($validated);
+        $trip = $request->user()->trips()->create($request->only([
+            'origin',
+            'destination',
+            'destination_name'
+        ]));
+
+        TripCreated::dispatch($trip, $request->user());
+
+        return $trip;
     }
 
     public function show(Request $request, Trip $trip)
@@ -46,12 +55,12 @@ class TripController extends Controller
         ]);
 
         $trip->update([
-            'driver_id' => $request->user()->id,
+            'driver_id' => $request->user()->driver->id,
             'driver_location' => $request->driver_location
         ]);
 
         $trip->load('driver.user');
-        TripAccepted::dispatch($trip, $request->user());
+        TripAccepted::dispatch($trip, $trip->user);
 
         return $trip;
     }
@@ -92,7 +101,7 @@ class TripController extends Controller
         ]);
 
         $trip->load('driver.user');
-        TripLocationUpdated::dispatch($trip, $request->user());
+        TripLocationUpdated::dispatch($trip, $trip->user);
 
         return $trip;
     }

@@ -12,12 +12,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TripEnded implements ShouldBroadcast
+class TripCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public Trip $trip;
-    private User $user;
+    public $trip;
+    private $user;
+
     public function __construct(Trip $trip, User $user)
     {
         $this->trip = $trip;
@@ -27,7 +28,7 @@ class TripEnded implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('passenger_' . $this->user->id)
+            new Channel('drivers')
         ];
     }
 }

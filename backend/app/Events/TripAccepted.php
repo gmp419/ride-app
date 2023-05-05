@@ -12,17 +12,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TripAccepted
+class TripAccepted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public Trip $trip;
-    private User $user;
+    public $trip;
+    private $user;
+
     public function __construct(Trip $trip, User $user)
     {
         $this->trip = $trip;
         $this->user = $user;
     }
+
 
     public function broadcastOn(): array
     {
