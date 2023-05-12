@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8e661d3-547c-4185-a1c8-24749c95edf7" name="Changes" comment="Adding frontend">
-      <change afterPath="$PROJECT_DIR$/backend/app/Events/TripCreated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Events/TripAccepted.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Events/TripAccepted.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Events/TripEnded.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Events/TripEnded.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Events/TripLocationUpdated.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Events/TripLocationUpdated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Events/TripStarted.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Events/TripStarted.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/TripController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/TripController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/stores/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/stores/location.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/stores/trip.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/stores/trip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/DrivingView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/DrivingView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/TripView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/TripView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,25 +175,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.laravel-idea.search-composer-json": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/xampp/htdocs/ride-app/frontend/src/views",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PhpStorm 2021.1.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.laravel-idea.search-composer-json&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/ride-app/frontend/src/views&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PhpStorm 2021.1.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\ride-app\frontend\src\views" />
@@ -212,6 +211,8 @@
       <workItem from="1683071052631" duration="4620000" />
       <workItem from="1683143646072" duration="14260000" />
       <workItem from="1683231201512" duration="15212000" />
+      <workItem from="1683326851630" duration="593000" />
+      <workItem from="1683850629696" duration="2475000" />
     </task>
     <task id="LOCAL-00001" summary="Adding frontend">
       <created>1683232045852</created>

@@ -31,10 +31,12 @@ import {useTripStore} from "@/stores/trip";
 import {onMounted, ref} from "vue";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
+import {useRouter} from "vue-router";
 
 const location = useLocationStore()
 const trip = useTripStore()
 
+const router = useRouter()
 const gMap = ref(null)
 const gMapObject = ref(null)
 const title = ref('Waiting on a driver')
@@ -96,7 +98,35 @@ onMounted(() => {
         console.log('trip location updated fire', e)
         trip.$patch(e.trip)
         setTimeout(updateMapBounds, 1000)
+      })
 
+      .listen('TripStarted', (e) => {
+        console.log('trip started', e)
+        trip.$patch(e.trip)
+        location.$patch({
+          current: {
+            geometry: e.trip.destination
+          }
+        })
+        title.value = 'You are on your way..'
+        message.value = `You are headed to ${e.trip.destination_name}`
+      })
+
+      .listen('TripEnded', (e) => {
+        console.log('trip ended', e)
+        trip.$patch(e.trip)
+
+        title.value = 'You have arrived!'
+        message.value = `Hope you enjoyed your ride with ${e.trip.driver.user.name}`
+
+        setTimeout(() => {
+          trip.reset()
+          location.reset()
+
+          router.push({
+            name: 'landing'
+          })
+        }, 7000)
       })
 })
 

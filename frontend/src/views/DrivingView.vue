@@ -3,7 +3,7 @@
     <div class="pt-16">
       <h1 class="text-3xl font-semibold mb-4">{{ title }}</h1>
       <div>
-        <div class="overflow-hidden shadow sm:rounded-md max-w-sm mx-auto text-left">
+        <div class="overflow-hidden shadow sm:rounded-md max-w-sm mx-auto text-left" v-if="! trip.is_complete">
           <div class="bg-white px-4 py-5 sm:p-6">
             <div>
               <GMapMap :zoom="14" :center="location.current.geometry" ref="gMap"
@@ -27,11 +27,11 @@
               Passenger Picked Up</button>
           </div>
         </div>
-<!--        <div class="overflow-hidden shadow sm:rounded-md max-w-sm mx-auto text-left" >-->
-<!--          <div class="bg-white px-4 py-5 sm:p-6">-->
-<!--            <Tada />-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class="overflow-hidden shadow sm:rounded-md max-w-sm mx-auto text-left" v-else>
+          <div class="bg-white px-4 py-5 sm:p-6">
+            <Tada />
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -43,6 +43,7 @@ import {useLocationStore} from "@/stores/location";
 import Tada from "@/components/Tada.vue";
 import http from "@/helpers/http";
 import {useTripStore} from "@/stores/trip";
+import router from "@/router";
 
 const location = useLocationStore()
 const trip = useTripStore()
@@ -77,8 +78,37 @@ const updateMapBounds = (mapObject) => {
   mapObject.fitBounds(latLngBounds)
 }
 
-const completeTrip = () => {}
-const passengerPickedUp = () => {}
+const completeTrip = () => {
+  http().post(`/api/trip/${trip.id}/end`)
+      .then((response) => {
+        title.value = 'Trip completed'
+        trip.$patch(response.data)
+
+        setTimeout(() => {
+          trip.reset()
+          location.reset()
+
+          router.push({
+            name: 'standBy'
+          })
+        }, 3000)
+
+      })
+      .catch((error) => { console.error(error) })
+}
+const passengerPickedUp = () => {
+  http().post(`/api/trip/${trip.id}/start`)
+      .then((response) => {
+        title.value = 'Travelling to the destination'
+        location.$patch({
+          name: response.data.destination_name,
+          geometry: response.data.destination,
+        })
+
+        trip.$patch(response.data)
+      })
+      .catch((error) => { console.error(error) })
+}
 
 const broadCastDriverLocation = () => {
   http().post(`/api/trip/${trip.id}/location`, {

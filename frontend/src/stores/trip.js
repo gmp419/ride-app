@@ -21,6 +21,8 @@ export const useTripStore = defineStore('trip', () => {
   })
 
   const destination_name = ref('')
+  const is_started = ref(false)
+  const is_complete = ref(false)
 
   const driver = reactive({
     id: null,
@@ -51,7 +53,9 @@ export const useTripStore = defineStore('trip', () => {
     driver.model = null
     driver.licence_plate = null
     driver.user.name = null
+    is_started.value = false
+    is_complete.value = false
   }
 
-  return { id, user_id, origin, destination, destination_name,driver_location, reset, driver}
+  return { id, user_id, origin, destination, destination_name,driver_location, reset, driver, is_complete, is_started}
 })
